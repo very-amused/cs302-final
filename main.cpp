@@ -2,9 +2,36 @@
 
 int WinMain() {
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Red);
+    //creates the window
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Golf Sim");
+    
+    //creates green background
+    sf::RectangleShape grass(sf::Vector2f(800,600));
+    grass.setFillColor(sf::Color::Green);
+
+    //creates hole
+    sf::CircleShape hole(10);
+    hole.setFillColor(sf::Color::Black);
+    hole.setPosition(700, 200);
+
+    //creates sand
+    sf::CircleShape sand(60);
+    sand.setFillColor(sf::Color(194, 178, 128));
+    sand.setPosition(400, 400);
+
+    //creates water
+    sf::CircleShape water(80);
+    water.setFillColor(sf::Color::Blue);
+    water.setPosition(300, 60);
+
+    //creates flagpole
+    sf::RectangleShape flagPole(sf::Vector2f(5, 50));
+    flagPole.setFillColor(sf::Color(170,170,170));
+    flagPole.setPosition(707, 150);
+
+    //creates flag
+
+
 
     while (window.isOpen())
     {
@@ -16,9 +43,14 @@ int WinMain() {
         }
 
         window.clear();
-        window.draw(shape);
+
+        window.draw(grass);
+        window.draw(hole);
+        window.draw(sand);
+        window.draw(water);
+        window.draw(flagPole);
+
         window.display();
     }
 
 	return 0;
-}
