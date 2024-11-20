@@ -25,7 +25,7 @@ int WinMain() {
     water.setPosition(300, 60);
 
     //creates flagpole
-    sf::RectangleShape flagPole(sf::Vector2f(5, 50));
+    sf::RectangleShape flagPole(sf::Vector2f(5, 60));
     flagPole.setFillColor(sf::Color(170,170,170));
     flagPole.setPosition(707, 150);
 
