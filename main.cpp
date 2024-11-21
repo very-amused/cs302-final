@@ -1,12 +1,13 @@
 #include<sfml/Graphics.hpp>
 
-int WinMain() {
+int WinMain()
+{
 
     //creates the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Golf Sim");
-    
+
     //creates green background
-    sf::RectangleShape grass(sf::Vector2f(800,600));
+    sf::RectangleShape grass(sf::Vector2f(800, 600));
     grass.setFillColor(sf::Color::Green);
 
     //creates hole
@@ -26,12 +27,22 @@ int WinMain() {
 
     //creates flagpole
     sf::RectangleShape flagPole(sf::Vector2f(5, 60));
-    flagPole.setFillColor(sf::Color(170,170,170));
+    flagPole.setFillColor(sf::Color(170, 170, 170));
     flagPole.setPosition(707, 150);
 
     //creates flag
 
 
+    //creates power meter outline
+    sf::RectangleShape powerMeterGreen(sf::Vector2f(20, 50));
+    powerMeterGreen.setFillColor(sf::Color::White);
+    powerMeterGreen.setPosition(150, 140);
+    sf::RectangleShape powerMeterYellow(sf::Vector2f(20, 30));
+    powerMeterYellow.setFillColor(sf::Color::Yellow);
+    powerMeterYellow.setPosition(150, 110);
+    sf::RectangleShape powerMeterRed(sf::Vector2f(20, 10));
+    powerMeterRed.setFillColor(sf::Color::Red);
+    powerMeterRed.setPosition(150, 100);
 
     while (window.isOpen())
     {
@@ -49,8 +60,12 @@ int WinMain() {
         window.draw(sand);
         window.draw(water);
         window.draw(flagPole);
+        window.draw(powerMeterGreen);
+        window.draw(powerMeterYellow);
+        window.draw(powerMeterRed);
 
         window.display();
     }
 
-	return 0;
+    return 0;
+}
