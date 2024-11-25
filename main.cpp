@@ -1,4 +1,4 @@
-#include<sfml/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 int WinMain()
 {
@@ -68,4 +68,8 @@ int WinMain()
     }
 
     return 0;
+}
+
+int main() {
+	return WinMain();
 }

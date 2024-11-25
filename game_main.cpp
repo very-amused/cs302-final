@@ -1,9 +1,10 @@
 #include <iostream>
-#include "Game.h"
+#include "game.h"
 
 // Temporary file to house the Game class
 // Will merge golf stuff into this main class
 
+/*
 int main() {   
     
     // Init Game engine
@@ -22,3 +23,4 @@ int main() {
     // End of application
     return 0;
 }
+*/
