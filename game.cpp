@@ -209,7 +209,6 @@ void Game::pollEvents()
             // Pressing N will move on
             else if (ev.key.code == sf::Keyboard::N)
             {
-								shotCounter = 0;
                 this->updateMap();
             }
 		}
@@ -275,7 +274,7 @@ void Game::render()
 	// Ball in the hole
     if (isCollision())
     {
-			std::cout << "Hole in " << shotCounter << '\n';
+			std::cout << "Total score: " << shotCounter << '\n';
         updateMap();
     }
 
