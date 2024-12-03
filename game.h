@@ -33,6 +33,7 @@ private:
 	// ******************************* Private Functions *******************************
 
 	void initVariables();
+	void initMaps();
 	void initWindow();
 
 public:
@@ -49,6 +50,9 @@ public:
 	// ******************************* Functions *******************************
 
 	void pollEvents();
+	void moveGolfBall();
+	bool isCollision();
+	void resetBallPosition();
 	void update();
 	void render();
 };

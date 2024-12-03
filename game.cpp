@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <iostream>
 // ******************************* Private Functions *******************************
 
 void Game::initVariables()
@@ -17,12 +17,16 @@ void Game::initVariables()
 	// Loading golf ball and texture
 	this->ballTexture.loadFromFile("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/golf-ball.png");
 	this->golfBall.setTexture(ballTexture);
+    this->resetBallPosition();
 
 	// Create Hole on the screen
 	this->hole.setRadius(10);
 	this->hole.setFillColor(sf::Color::Black);
 	this->hole.setPosition(400, 50);
+}
 
+void Game::initMaps()
+{
     // ******************************* Levels *******************************
 
     const int level[] =
@@ -127,16 +131,15 @@ void Game::initVariables()
     const int* combined[] = { level, level2, level3, level4, level5, level6, level7, level8, level9 };
 
     // ******************************* Maps *******************************
-    
 
-	for (int i = 0; i < 9; i++) 
+
+    for (int i = 0; i < 9; i++)
     {
         // Makes TileMap* and stores it in mapVector
-		TileMap* map = new TileMap;
-		map->load("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[i], 16, 8);
+        TileMap* map = new TileMap;
+        map->load("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[i], 16, 8);
         this->mapVector.push_back(map);
-	}
-
+    }
 }
 
 void Game::initWindow()
@@ -151,6 +154,7 @@ void Game::initWindow()
 Game::Game()
 {
 	this->initVariables();
+    this->initMaps();
 	this->initWindow();
 
 }
@@ -179,9 +183,14 @@ void Game::pollEvents()
 	while (this->window->pollEvent(this->ev))
 	{	
 
-		if (this->ev.type == sf::Event::MouseButtonPressed) 
-		{
-			this->currentMap++;
+		if (this->ev.type == sf::Event::KeyPressed) 
+        {
+            // Pressing R will reset the screen
+            if(ev.key.code == sf::Keyboard::R) 
+            {
+                this->currentMap++;
+                this->resetBallPosition();
+            }
 		}
 
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8) 
@@ -191,15 +200,40 @@ void Game::pollEvents()
 	}
 }
 
+void Game::moveGolfBall()
+{
+    // Stupid movement
+    golfBall.move(sf::Vector2f(0.5f, 0.0f));
+}
+
+bool Game::isCollision()
+{
+    return this->golfBall.getGlobalBounds().intersects(this->hole.getGlobalBounds());
+}
+
+void Game::resetBallPosition()
+{
+    // Call Reset for each map
+    this->golfBall.setPosition(10, 50);
+}
+
 void Game::update()
 {
 	this->pollEvents();
+    this->moveGolfBall();
 }
 
 void Game::render()
 {
 	this->window->clear();					            // Clears old frame
     
+    if (isCollision())
+    {
+        std::cout << "Collision" << "\n";
+        this->currentMap++;
+        this->resetBallPosition();
+    }
+
     this->window->draw(*this->mapVector[currentMap]);   // Draws map
 	this->window->draw(hole);				            // Draws hole
 	this->window->draw(golfBall);			            // Draws golfBall
