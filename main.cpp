@@ -186,6 +186,10 @@ int WinMain()
             if (event.type == sf::Event::MouseButtonPressed ) {
                 i = (i + 1);
             }
+            if (i == 8)
+            {
+                window.close();
+            }
         }
 
         // draw the map
