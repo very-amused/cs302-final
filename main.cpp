@@ -18,7 +18,7 @@ int WinMain()
     hole.setPosition(400, 50);
 
     //creates sand
-    /*sf::CircleShape sand(60);
+    sf::CircleShape sand(60);
     sand.setFillColor(sf::Color(194, 178, 128));
     sand.setPosition(400, 400);
 
@@ -49,7 +49,7 @@ int WinMain()
     powerMeterYellow.setPosition(150, 110);
     sf::RectangleShape powerMeterRed(sf::Vector2f(20, 10));
     powerMeterRed.setFillColor(sf::Color::Red);
-    powerMeterRed.setPosition(150, 100);*/
+    powerMeterRed.setPosition(150, 100);
 
     const int level[] =
     {
@@ -150,14 +150,31 @@ int WinMain()
         0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0,
         3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
     };
-    const int *combined[] = { level, level2, level3, level4, level5, level6, level7, level8, level9 };
+    const int* combined[] = { level, level2, level3, level4, level5, level6, level7, level8, level9 };
     unsigned short randomMap = rand() % 2;
     // create the tilemap from the level definition
-    TileMap map;
-    if (!map.load("C://Users/owenn/source/repos/Project1/sfml/include/SFML/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[8], 16, 8))
-    {
-        return -1;
-    }
+    TileMap map1;
+    TileMap map2;
+    TileMap map3;
+    TileMap map4;
+    TileMap map5;
+    TileMap map6;
+    TileMap map7;
+    TileMap map8;
+    TileMap map9;
+    map1.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[0], 16, 8);
+    map2.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[1], 16, 8);
+    map3.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[2], 16, 8);
+    map4.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[3], 16, 8);
+    map5.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[4], 16, 8);
+    map6.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[5], 16, 8);
+    map7.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[6], 16, 8);
+    map8.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[7], 16, 8);
+    map9.load("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[8], 16, 8);
+    TileMap maps[] = { map1, map2, map3, map4, map5, map6, map7, map8, map9 };
+
+    int i = 0;
+
     while (window.isOpen())
     {
         // handle events
@@ -166,14 +183,20 @@ int WinMain()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::MouseButtonPressed ) {
+                i = (i + 1);
+            }
         }
 
         // draw the map
-        window.clear();
-        window.draw(map);
-        window.draw(hole);
-        window.draw(golfBall);
-        window.display();
+            
+            window.clear();
+            window.draw(maps[i]);
+            window.draw(hole);
+            window.draw(golfBall);
+            window.display();
+            
+           
     }
 
     return 0;
