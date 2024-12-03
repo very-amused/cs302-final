@@ -206,15 +206,11 @@ void Game::pollEvents()
                 this->updateMap();
             }
 		}
-        if (this->ev.type == sf::Event::MouseButtonPressed)
+        else if (this->ev.type == sf::Event::MouseButtonPressed)
         {
             this->ballMovementTrue = !ballMovementTrue;
-            //std::cout << ballMovementTrue << "\n";
             mousePosition.x = this->ev.mouseButton.x;
             mousePosition.y = this->ev.mouseButton.y;
-            //std::cout << "mouse x: " << this->ev.mouseButton.x << std::endl;
-            //std::cout << "mouse y: " << this->ev.mouseButton.y << std::endl;
-
         }
 
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8) 
@@ -226,6 +222,7 @@ void Game::pollEvents()
 
 void Game::updateMap()
 {
+    // Updates things on map and prints map number 
     std::cout << "Map #" << this->currentMap + 2 << "\n";
     this->currentMap++;
     this->resetBallPosition();
@@ -233,6 +230,7 @@ void Game::updateMap()
 
 void Game::moveGolfBall()
 {   
+    // Calculates velocity x and y based on difference in position
     sf::Vector2f ballPosition = golfBall.getPosition();
     float x_velocity = (mousePosition.x - ballPosition.x) / 50;
     float y_velocity = (mousePosition.y - ballPosition.y) / 50;
@@ -247,25 +245,29 @@ void Game::moveGolfBall()
 void Game::resetBallPosition()
 {
     // Call Reset for each map
-    this->golfBall.setPosition(10.f, video_mode.height / 2);
+    this->golfBall.setPosition(10.f, ((float)video_mode.height / 2));
     this->ballMovementTrue = false;
 }
 
+
 void Game::update()
 {
+    /* Every update each frame goes here */
+
 	this->pollEvents();
     this->moveGolfBall();
 }
 
 void Game::render()
 {
-	this->window->clear();					            // Clears old frame
+	this->window->clear();					            // Clears old frame for new render
     
-    // Resets screen and changes map when ball makes contact with the hole
     if (isCollision())
     {
         updateMap();
     }
+
+    // All Drawing
 
     this->window->draw(*this->mapVector[currentMap]);   // Draws map
 	this->window->draw(hole);				            // Draws hole
