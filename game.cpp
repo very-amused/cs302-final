@@ -18,6 +18,7 @@ void Game::initVariables()
 	this->ballTexture.loadFromFile("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/golf-ball.png");
 	this->golfBall.setTexture(ballTexture);
     this->resetBallPosition();
+    this->ballMovementTrue = false;
 
 	// Create Hole on the screen
 	this->hole.setRadius(10);
@@ -185,13 +186,28 @@ void Game::pollEvents()
 
 		if (this->ev.type == sf::Event::KeyPressed) 
         {
-            // Pressing R will reset the screen
+            // Pressing N will reset the screen
             if(ev.key.code == sf::Keyboard::R) 
+            {
+                this->resetBallPosition();
+            }
+            // Pressing N will move on
+            else if (ev.key.code == sf::Keyboard::N)
             {
                 this->currentMap++;
                 this->resetBallPosition();
             }
 		}
+        if (this->ev.type == sf::Event::MouseButtonPressed)
+        {
+            this->ballMovementTrue = !ballMovementTrue;
+            //std::cout << ballMovementTrue << "\n";
+            mousePosition.x = this->ev.mouseButton.x;
+            mousePosition.y = this->ev.mouseButton.y;
+            //std::cout << "mouse x: " << this->ev.mouseButton.x << std::endl;
+            //std::cout << "mouse y: " << this->ev.mouseButton.y << std::endl;
+
+        }
 
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8) 
 		{
@@ -201,9 +217,14 @@ void Game::pollEvents()
 }
 
 void Game::moveGolfBall()
-{
+{   
+    sf::Vector2f ballPosition = golfBall.getPosition();
+    float x_velocity = (mousePosition.x - ballPosition.x) / 50;
+    float y_velocity = (mousePosition.y - ballPosition.y) / 50;
+
     // Stupid movement
-    golfBall.move(sf::Vector2f(0.5f, 0.0f));
+    if(ballMovementTrue)
+        golfBall.move(x_velocity, y_velocity);
 }
 
 bool Game::isCollision()
@@ -214,7 +235,8 @@ bool Game::isCollision()
 void Game::resetBallPosition()
 {
     // Call Reset for each map
-    this->golfBall.setPosition(10, 50);
+    this->golfBall.setPosition(10.f, video_mode.height / 2);
+    this->ballMovementTrue = false;
 }
 
 void Game::update()
@@ -227,9 +249,10 @@ void Game::render()
 {
 	this->window->clear();					            // Clears old frame
     
+    // Resets screen and changes map when ball makes contact with the hole
     if (isCollision())
     {
-        std::cout << "Collision" << "\n";
+        //std::cout << "Collision" << "\n";
         this->currentMap++;
         this->resetBallPosition();
     }

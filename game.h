@@ -27,6 +27,8 @@ private:
 
 	sf::Texture ballTexture;
 	sf::Sprite golfBall;
+	bool ballMovementTrue;
+	sf::Vector2f mousePosition;			// of mouse click
 
 	sf::CircleShape hole;
 	std::vector<TileMap*> mapVector;
