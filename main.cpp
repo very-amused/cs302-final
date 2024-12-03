@@ -32,7 +32,12 @@ int WinMain()
     flagPole.setFillColor(sf::Color(170, 170, 170));
     flagPole.setPosition(707, 150);
 
-    //creates flag
+    //creates ball
+    sf::Texture ballTexture;
+    sf::Sprite golfBall;
+
+    ballTexture.loadFromFile("C:/Users/swagm/source/repos/SFML Tutorial/SFML Tutorial/assets/player/textures/golf-ball.png");
+    golfBall.setTexture(ballTexture);
 
 
     //creates power meter outline
@@ -167,6 +172,7 @@ int WinMain()
         window.clear();
         window.draw(map);
         window.draw(hole);
+        window.draw(golfBall);
         window.display();
     }
 
