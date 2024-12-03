@@ -38,7 +38,7 @@ int main()
     // powerMeterRed.setPosition(150, 100);
     
     
-    Game game;
+    Kellan game;
 
     // Game Loop
     while (game.running())
