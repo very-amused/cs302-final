@@ -11,9 +11,9 @@ CS302 final project.
 |Owen| 11-24 | 5:10PM - 11:00PM|
 |Charles| 12-2 |7:30pm - 11:15pm|
 
-Totals
+Totals-
 Owen:
-Charles: 6.5 hrs
+Charles: 6.5hrs
 Larry:
 Keith:
 
