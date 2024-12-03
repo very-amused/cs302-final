@@ -6,7 +6,9 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-/* 
+#include "TileMap.h"
+
+/*
 	Class that acts as the game engine.
 	Wrapper class
 */
@@ -15,25 +17,37 @@ class Game {
 
 private:
 
-	// Variables
-	sf::VideoMode video_mode;
-	// Window
+	// ******************************* Variables *******************************
+	
 	sf::RenderWindow *window;
+	sf::VideoMode video_mode;
 	sf::Event ev;
 
-	// ******************************* Private functions *******************************
+	int currentMap;
+
+	sf::Texture ballTexture;
+	sf::Sprite golfBall;
+
+	sf::CircleShape hole;
+	std::vector<TileMap*> mapVector;
+	// ******************************* Private Functions *******************************
+
 	void initVariables();
 	void initWindow();
 
 public:
+
 	// ******************************* Constructors / Destructors *******************************
+
 	Game();
 	virtual ~Game();
 
 	// ******************************* Accessors *******************************
+
 	const bool running() const;
 
 	// ******************************* Functions *******************************
+
 	void pollEvents();
 	void update();
 	void render();
