@@ -9,14 +9,15 @@ CS302 final project.
 |Charles| 11-20 | 4:30PM-6:15PM|
 |Larry| 11-24 | 3:40PM - 5:20|
 |Owen| 11-24 | 5:10PM - 11:00PM|
+|Charles| 12-2 |7:30pm - 11:15pm|
 
 Totals
 Owen:
-Charles:
+Charles: 6.5 hrs
 Larry:
 Keith:
 
-Total:
+Total: 6.5 hrs
 
 # Team Meetings
 November 11th from 11PM to 12AM
