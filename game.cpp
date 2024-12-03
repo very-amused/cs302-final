@@ -13,10 +13,13 @@ void Game::initVariables()
 	this->video_mode.height = 256;
 
 	this->currentMap = 0;
+    this->totalMaps = 9;
 
 	// Loading golf ball and texture
 	this->ballTexture.loadFromFile("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/golf-ball.png");
 	this->golfBall.setTexture(ballTexture);
+
+    // Sets ball up at origin
     this->resetBallPosition();
     this->ballMovementTrue = false;
 
@@ -134,7 +137,7 @@ void Game::initMaps()
     // ******************************* Maps *******************************
 
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < totalMaps; i++)
     {
         // Makes TileMap* and stores it in mapVector
         TileMap* map = new TileMap;
@@ -158,6 +161,7 @@ Game::Game()
     this->initMaps();
 	this->initWindow();
 
+    std::cout << "Map #" << this->currentMap + 1 << "\n";
 }
 
 Game::~Game()
@@ -176,6 +180,11 @@ const bool Game::running() const
 	return this->window->isOpen();
 }
 
+const bool Game::isCollision() const
+{
+    return this->golfBall.getGlobalBounds().intersects(this->hole.getGlobalBounds());
+}
+
 // ******************************* Functions *******************************
 
 void Game::pollEvents()
@@ -186,7 +195,7 @@ void Game::pollEvents()
 
 		if (this->ev.type == sf::Event::KeyPressed) 
         {
-            // Pressing N will reset the screen
+            // Pressing R will reset the screen
             if(ev.key.code == sf::Keyboard::R) 
             {
                 this->resetBallPosition();
@@ -194,8 +203,7 @@ void Game::pollEvents()
             // Pressing N will move on
             else if (ev.key.code == sf::Keyboard::N)
             {
-                this->currentMap++;
-                this->resetBallPosition();
+                this->updateMap();
             }
 		}
         if (this->ev.type == sf::Event::MouseButtonPressed)
@@ -216,6 +224,13 @@ void Game::pollEvents()
 	}
 }
 
+void Game::updateMap()
+{
+    std::cout << "Map #" << this->currentMap + 2 << "\n";
+    this->currentMap++;
+    this->resetBallPosition();
+}
+
 void Game::moveGolfBall()
 {   
     sf::Vector2f ballPosition = golfBall.getPosition();
@@ -223,13 +238,10 @@ void Game::moveGolfBall()
     float y_velocity = (mousePosition.y - ballPosition.y) / 50;
 
     // Stupid movement
-    if(ballMovementTrue)
+    if (ballMovementTrue)
+    {
         golfBall.move(x_velocity, y_velocity);
-}
-
-bool Game::isCollision()
-{
-    return this->golfBall.getGlobalBounds().intersects(this->hole.getGlobalBounds());
+    }
 }
 
 void Game::resetBallPosition()
@@ -252,9 +264,7 @@ void Game::render()
     // Resets screen and changes map when ball makes contact with the hole
     if (isCollision())
     {
-        //std::cout << "Collision" << "\n";
-        this->currentMap++;
-        this->resetBallPosition();
+        updateMap();
     }
 
     this->window->draw(*this->mapVector[currentMap]);   // Draws map
