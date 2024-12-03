@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "game.h"
 #include <iostream>
 // ******************************* Private Functions *******************************
 
@@ -16,7 +16,8 @@ void Game::initVariables()
     this->totalMaps = 9;
 
 	// Loading golf ball and texture
-	this->ballTexture.loadFromFile("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/golf-ball.png");
+	// TODO: embed assets at build time
+	this->ballTexture.loadFromFile("golf-ball.png");
 	this->golfBall.setTexture(ballTexture);
 
     // Sets ball up at origin
@@ -141,7 +142,8 @@ void Game::initMaps()
     {
         // Makes TileMap* and stores it in mapVector
         TileMap* map = new TileMap;
-        map->load("C:/Users/larry/source/repos/CS302-final-project/CS302-final-project/assets/player/textures/graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[i], 16, 8);
+				// TODO: embed assets at build time
+        map->load("graphics-vertex-array-tilemap-tileset.png", sf::Vector2u(32, 32), combined[i], 16, 8);
         this->mapVector.push_back(map);
     }
 }
@@ -187,6 +189,10 @@ const bool Game::isCollision() const
 
 // ******************************* Functions *******************************
 
+// HACK DUMB STUPID FUCKING GLOBAL
+// REMOVE REMOVE REMOVE REMOVE
+static int shotCounter = 0;
+
 void Game::pollEvents()
 {
 	// handle events
@@ -203,12 +209,16 @@ void Game::pollEvents()
             // Pressing N will move on
             else if (ev.key.code == sf::Keyboard::N)
             {
+								shotCounter = 0;
                 this->updateMap();
             }
 		}
         else if (this->ev.type == sf::Event::MouseButtonPressed)
         {
             this->ballMovementTrue = !ballMovementTrue;
+						if (this->ballMovementTrue) {
+							shotCounter++;
+						}
             mousePosition.x = this->ev.mouseButton.x;
             mousePosition.y = this->ev.mouseButton.y;
         }
@@ -262,8 +272,10 @@ void Game::render()
 {
 	this->window->clear();					            // Clears old frame for new render
     
+	// Ball in the hole
     if (isCollision())
     {
+			std::cout << "Hole in " << shotCounter << '\n';
         updateMap();
     }
 
