@@ -17,3 +17,9 @@ Larry:
 Keith:
 
 Total:
+
+# Team Meetings
+November 11th from 11PM to 12AM
+Larry, Owen, and Charlie were present.
+We discussed what software we were going to develop our game in after discovering that Unity was not going to work for us. We ended up deciding on SFML through Visual Studio.
+We decided that we would each research how to set up SFML.
