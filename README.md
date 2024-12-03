@@ -7,9 +7,11 @@ CS302 final project.
 |Owen|November 19-20|11:00PM-4:00AM|
 |Owen|November 20-21|11:15PM-12:26AM|
 |Charles| 11-20 | 4:30PM-6:15PM|
-|Larry| 11-24 | 3:40PM - 5:20|
+|Larry| 11-24 | 3:40PM - 5:40PM|
 |Owen| 11-24 | 5:10PM - 11:00PM|
-|Charles| 12-2 |7:30pm - 11:15pm|
+|Charles| 12-2 |7:30PM - 11:15PM|
+|Larry| 12-02 | 10:40PM - 2:10AM|
+
 
 Totals-
 Owen:
