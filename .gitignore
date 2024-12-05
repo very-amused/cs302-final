@@ -1,6 +1,5 @@
 *.o
 main
 .vs
-*.dll
 */assets
 **/x64/Debug
