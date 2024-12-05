@@ -2,7 +2,7 @@
 #include <iostream>
 // ******************************* Private Functions *******************************
 
-void Kellan::initVariables()
+void Game::initVariables()
 {
     // ******************************* Normal Variables *******************************
 
@@ -30,7 +30,7 @@ void Kellan::initVariables()
 	this->hole.setPosition(400, 50);
 }
 
-void Kellan::initMaps()
+void Game::initMaps()
 {
     // ******************************* Levels *******************************
 
@@ -148,7 +148,7 @@ void Kellan::initMaps()
     }
 }
 
-void Kellan::initWindow()
+void Game::initWindow()
 {
 	// Creates the window
 	this->window = new sf::RenderWindow(this->video_mode, "Golf Sim");
@@ -157,7 +157,7 @@ void Kellan::initWindow()
 
 // ******************************* Constructors / Destructors *******************************
 
-Kellan::Kellan()
+Game::Game()
 {
 	this->initVariables();
     this->initMaps();
@@ -166,7 +166,7 @@ Kellan::Kellan()
     std::cout << "Map #" << this->currentMap + 1 << "\n";
 }
 
-Kellan::~Kellan()
+Game::~Game()
 {
 	delete this->window;
     for (auto tilemp : mapVector) 
@@ -177,12 +177,12 @@ Kellan::~Kellan()
 
 // ******************************* Accessors *******************************
 
-const bool Kellan::running() const
+const bool Game::running() const
 {
 	return this->window->isOpen();
 }
 
-const bool Kellan::isCollision() const
+const bool Game::isCollision() const
 {
     return this->golfBall.getGlobalBounds().intersects(this->hole.getGlobalBounds());
 }
@@ -193,7 +193,7 @@ const bool Kellan::isCollision() const
 // REMOVE REMOVE REMOVE REMOVE
 static int shotCounter = 0;
 
-void Kellan::pollEvents()
+void Game::pollEvents()
 {
 	// handle events
 	while (this->window->pollEvent(this->ev))
@@ -229,7 +229,7 @@ void Kellan::pollEvents()
 	}
 }
 
-void Kellan::updateMap()
+void Game::updateMap()
 {
     // Updates things on map and prints map number 
     std::cout << "Map #" << this->currentMap + 2 << "\n";
@@ -237,7 +237,7 @@ void Kellan::updateMap()
     this->resetBallPosition();
 }
 
-void Kellan::moveGolfBall()
+void Game::moveGolfBall()
 {   
     // Calculates velocity x and y based on difference in position
     sf::Vector2f ballPosition = golfBall.getPosition();
@@ -251,7 +251,7 @@ void Kellan::moveGolfBall()
     }
 }
 
-void Kellan::resetBallPosition()
+void Game::resetBallPosition()
 {
     // Call Reset for each map
     this->golfBall.setPosition(10.f, ((float)video_mode.height / 2));
@@ -259,7 +259,7 @@ void Kellan::resetBallPosition()
 }
 
 
-void Kellan::update()
+void Game::update()
 {
     /* Every update each frame goes here */
 
@@ -267,7 +267,7 @@ void Kellan::update()
     this->moveGolfBall();
 }
 
-void Kellan::render()
+void Game::render()
 {
 	this->window->clear();					            // Clears old frame for new render
     

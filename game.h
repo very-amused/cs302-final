@@ -13,7 +13,7 @@
 	Wrapper class
 */
 
-class Kellan {
+class Game {
 
 private:
 
@@ -44,8 +44,8 @@ public:
 
 	// ******************************* Constructors / Destructors *******************************
 
-	Kellan();
-	virtual ~Kellan();
+	Game();
+	virtual ~Game();
 
 	// ******************************* Accessors *******************************
 
