@@ -12,18 +12,23 @@ CS302 final project.
 |Charles| 12-2 |7:30pm - 11:15PM|
 |Larry| December 2-3 | 10:40PM - 2:10AM|
 |Larry| 12-03 | 9:20AM - 10:45AM|
+|Charles| 12-5 | 2:00PM-6:00PM |
 
 
 Totals-
 Owen:
-Charles: 6.5hrs
+Charles: 10.5hrs
 Larry:
 Keith:
 
-Total: 6.5 hrs
+Total: 10.5 hrs
 
 # Team Meetings
 November 11th from 11PM to 12AM
-Larry, Owen, and Charlie were present.
+Larry, Owen, and Charles were present.
 We discussed what software we were going to develop our game in after discovering that Unity was not going to work for us. We ended up deciding on SFML through Visual Studio.
 We decided that we would each research how to set up SFML.
+
+December 5th from 2pm-4pm
+Charles, Larry, and Keith were present.
+We discussed what final touches needed to be added to our game and split up to work.
