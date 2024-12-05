@@ -24,12 +24,114 @@ void Game::initVariables()
 	this->resetBallPosition();
 	this->ballMovementTrue = false;
 
+
+
 	// Create Hole on the screen
 	this->hole.setRadius(10);
 	this->hole.setFillColor(sf::Color::Black);
 	this->hole.setPosition(400, 50);
 }
 
+const int* combined[9];
+const int level[] =
+{
+	0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+	0, 0, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
+	0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
+	0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
+	2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
+	0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+};
+const int level2[] =
+{
+	0, 3, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
+	0, 0, 3, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0,
+	2, 0, 3, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 1, 1, 1,
+	0, 0, 3, 0, 0, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+};
+const int level3[] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3,
+	0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 3, 3, 0, 0,
+	0, 0, 0, 0, 1, 1, 1, 2, 0, 0, 0, 3, 3, 0, 2, 0,
+	2, 0, 0, 0, 0, 0, 2, 2, 3, 3, 3, 3, 0, 0, 0, 0,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0,
+};
+const int level4[] =
+{
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1,
+	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+	1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 1,
+	0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 3, 3, 0, 1,
+	1, 0, 0, 0, 1, 1, 1, 2, 0, 0, 0, 3, 3, 0, 2, 1,
+	1, 0, 0, 0, 0, 0, 2, 2, 3, 3, 3, 3, 0, 0, 0, 1,
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+};
+const int level5[] =
+{
+	0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 3,
+	0, 0, 0, 0, 1, 1, 1, 3, 3, 0, 0, 0, 3, 3, 0, 0,
+	0, 0, 0, 0, 1, 1, 1, 1, 3, 0, 0, 3, 3, 0, 2, 0,
+	0, 0, 0, 0, 0, 0, 2, 2, 3, 3, 3, 3, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+};
+const int level6[] =
+{
+	1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 3,
+	3, 3, 3, 3, 3, 3, 2, 3, 3, 0, 0, 0, 3, 3, 0, 0,
+	0, 0, 0, 0, 2, 2, 2, 2, 3, 0, 0, 3, 3, 0, 2, 0,
+	0, 0, 0, 0, 0, 2, 2, 2, 3, 3, 3, 3, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0,
+};
+const int level7[] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0,
+	0, 0, 0, 0, 0, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+const int level8[] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0,
+	0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0,
+	3, 3, 3, 3, 3, 0, 0, 2, 0, 0, 3, 3, 3, 3, 3, 3,
+};
+const int level9[] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1,
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1,
+	0, 0, 0, 0, 0, 2, 2, 1, 1, 0, 0, 0, 0, 0, 2, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+};
 void Game::initMaps()
 {
 	// ******************************* Levels *******************************
@@ -133,8 +235,16 @@ void Game::initMaps()
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	};
-	const int* combined[] = { level, level2, level3, level4, level5, level6, level7, level8, level9 };
-
+	combined[0] = level; 
+	combined[1] = level2;
+	combined[2] = level3;
+	combined[3] = level4;
+	combined[4] = level5;
+	combined[5] = level6;
+	combined[6] = level7;
+	combined[7] = level8;
+	combined[8] = level9;
+	
 	// ******************************* Maps *******************************
 
 
@@ -189,8 +299,7 @@ const bool Game::isCollision() const
 
 // ******************************* Functions *******************************
 
-// HACK DUMB STUPID FUCKING GLOBAL
-// REMOVE REMOVE REMOVE REMOVE
+
 static int shotCounter = 0;
 
 void Game::pollEvents()
@@ -222,6 +331,20 @@ void Game::pollEvents()
 			mousePosition.y = this->ev.mouseButton.y;
 		}
 
+		/*
+		sf::Vector2f position = golfBall.getPosition();
+		int xCoord = position.x / 32;
+		int yCoord = position.y / 32;
+		if (currentMap == 0)
+		{
+			if (level[yCoord * 16 + xCoord] == 2)
+			{
+				resetBallPosition();
+			}
+		}*/
+
+		
+
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8)
 		{
 			this->window->close();
@@ -248,6 +371,73 @@ void Game::moveGolfBall()
 	if (ballMovementTrue)
 	{
 		golfBall.move(x_velocity, y_velocity);
+
+		sf::Vector2f position = golfBall.getPosition();
+		int xCoord = position.x / 32;
+		int yCoord = position.y / 32;
+		if (currentMap == 0)
+		{
+			if (level[yCoord * 16 + xCoord] == 2 || level[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 1)
+		{
+			if (level2[yCoord * 16 + xCoord] == 2 || level2[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 2)
+		{
+			if (level3[yCoord * 16 + xCoord] == 2 || level3[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 3)
+		{
+			if (level4[yCoord * 16 + xCoord] == 2 || level4[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 4)
+		{
+			if (level5[yCoord * 16 + xCoord] == 2 || level5[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 5)
+		{
+			if (level6[yCoord * 16 + xCoord] == 2 || level6[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 6)
+		{
+			if (level7[yCoord * 16 + xCoord] == 2 || level7[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 7)
+		{
+			if (level8[yCoord * 16 + xCoord] == 2 || level8[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
+		if (currentMap == 8)
+		{
+			if (level9[yCoord * 16 + xCoord] == 2 || level9[yCoord * 16 + xCoord] == 1)
+			{
+				resetBallPosition();
+			}
+		}
 	}
 }
 
