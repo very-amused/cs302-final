@@ -1,5 +1,5 @@
 #include "TileMap.h"
-#include "game.h"
+#include "Game.h"
 
 int main()
 {

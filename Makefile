@@ -1,20 +1,8 @@
-CXX=g++
-sfml-flags=-lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio -lsfml-network
-LDFLAGS=$(sfml-flags)
+proj-dir=CS302-final-project
 
-src-files=$(shell find -name '*.cpp')
-obj-files=$(src-files:.cpp=.cpp.o)
-
-main: $(obj-files)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o$@ $^
-
-release: CXXFLAGS+=-O3
-release: main
-.PHONY: release
-
-%.cpp.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c -o$@ $<
+$(proj-dir)/main:
+	$(MAKE) -C $(proj-dir)
 
 clean:
-	rm -f $(obj-files) main
+	$(MAKE) -C $(proj-dir) clean
 .PHONY: clean
