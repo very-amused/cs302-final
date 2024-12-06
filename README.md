@@ -12,17 +12,17 @@ CS302 final project.
 |Charles| 12-2 |7:30pm - 11:15PM|
 |Larry| December 2-3 | 10:40PM - 2:10AM|
 |Larry| 12-03 | 9:20AM - 10:45AM|
-|Charles| 12-5 | 2:00PM-6:00PM |
+|Charles| 12-5 | 2:00PM-6:30PM |
 |Keith | 12-5 | 10:30AM-3PM |
 
 
 Totals-
 1. Owen: 12.5hrs
-2. Charles: 10.5hrs
+2. Charles: 11 hrs
 3. Larry:
 4. Keith:
 
-Total: 22.5 hrs
+Total: 23 hrs
 
 # Team Meetings
 November 11th from 11PM to 12AM
@@ -33,7 +33,7 @@ We decided that we would each research how to set up SFML.
 December 5th from 2pm-4pm
 Charles, Larry, and Keith were present.
 We discussed what final touches needed to be added to our game and split up to work.
-Charlie would start on the collision detection while Larry works on moving the starting positions of the hole and ball. Keith would work on making the ball movement more realistic, which is what he has been tasked with this entire time and still hasnt done. 
+Charlie would start on the collision detection while Larry works on moving the starting positions of the hole and ball. Keith would work on making the ball movement more realistic, which is the only thing he has been tasked with this entire time. 
 
 
 # How to run/compile
