@@ -13,7 +13,7 @@ void Game::initVariables()
 	this->video_mode.width = 512;
 	this->video_mode.height = 256;
 
-	this->currentMap = 0;
+	this->currMapNum = 0;
 	this->totalMaps = 9;
 
 	// Loading golf ball and texture
@@ -24,12 +24,11 @@ void Game::initVariables()
 	this->resetBallPosition();
 	this->ballMovementTrue = false;
 
-
-
+	
 	// Create Hole on the screen
 	this->hole.setRadius(10);
 	this->hole.setFillColor(sf::Color::Black);
-	this->hole.setPosition(400, 50);
+	this->resetHolePosition();
 }
 
 
@@ -77,7 +76,7 @@ Game::Game()
 	this->initMaps();
 	this->initWindow();
 
-	std::cout << "Map #" << this->currentMap + 1 << "\n";
+	std::cout << "Map #" << this->currMapNum + 1 << "\n";
 }
 
 Game::~Game()
@@ -111,6 +110,8 @@ void Game::pollEvents()
 	// handle events
 	while (this->window->pollEvent(this->ev))
 	{
+		currPosition.x = this->ev.mouseMove.x;
+		currPosition.y = this->ev.mouseMove.y;
 
 		if (this->ev.type == sf::Event::KeyPressed)
 		{
@@ -134,20 +135,11 @@ void Game::pollEvents()
 			mousePosition.x = this->ev.mouseButton.x;
 			mousePosition.y = this->ev.mouseButton.y;
 		}
-		if (this->ev.type == sf::Event::Closed || this->currentMap == 8)
+		if (this->ev.type == sf::Event::Closed || this->currMapNum == 8)
 		{
 			this->window->close();
 		}
 	}
-}
-
-void Game::updateMap()
-{
-	// Updates things on map and prints map number 
-	std::cout << "Map #" << this->currentMap + 2 << "\n";
-
-	this->currentMap++;
-	this->resetBallPosition();
 }
 
 void Game::moveGolfBall()
@@ -169,17 +161,106 @@ void Game::moveGolfBall()
 		int yCoord = position.y / 32;
 
 		
-		if (mapArrays[currentMap][yCoord * 16 + xCoord] == 2 || mapArrays[currentMap][yCoord * 16 + xCoord] == 1) {
+		if (mapArrays[currMapNum][yCoord * 16 + xCoord] == 2 || mapArrays[currMapNum][yCoord * 16 + xCoord] == 1) {
 			this->resetBallPosition();
 		}
 	}
 }
 
+void Game::updateMap()
+{
+	// Updates things on map and prints map number 
+	std::cout << "Map #" << this->currMapNum + 2 << "\n";
+
+	this->currMapNum++;
+	this->resetBallPosition();
+	this->resetHolePosition();
+}
+
 void Game::resetBallPosition()
 {
 	// Call Reset for each map
-	this->golfBall.setPosition(10.f, ((float)video_mode.height / 2));
+	
+	if (this->currMapNum == 0)
+	{
+		this->golfBall.setPosition(sf::Vector2f(10.f, 110.f));
+	}
+	else if (this->currMapNum == 1)
+	{
+		this->golfBall.setPosition(sf::Vector2f(70.f, 200.f));
+	}
+	else if (this->currMapNum == 2)
+	{
+		this->golfBall.setPosition(sf::Vector2f(10.f, 110.f));
+	}
+	else if (this->currMapNum == 3)
+	{
+		this->golfBall.setPosition(sf::Vector2f(9.f, 137.f));
+	}
+	else if (this->currMapNum == 4)
+	{
+		this->golfBall.setPosition(sf::Vector2f(100.f, 200.f));
+	}
+	else if (this->currMapNum == 5)
+	{
+		this->golfBall.setPosition(sf::Vector2f(8.f, 142.f));
+	}
+	else if (this->currMapNum == 6)
+	{
+		this->golfBall.setPosition(sf::Vector2f(10.f, 110.f));
+	}
+	else if (this->currMapNum == 7)
+	{
+		this->golfBall.setPosition(sf::Vector2f(10.f, 110.f));
+	}
+	else if (this->currMapNum == 8)
+	{
+		this->golfBall.setPosition(sf::Vector2f(10.f, 110.f));
+	}
+
+	
 	this->ballMovementTrue = false;
+}
+
+void Game::resetHolePosition()
+{
+	// Call Reset for each map
+	if (this->currMapNum == 0)
+	{
+		this->hole.setPosition(sf::Vector2f(485.f, 70.f));
+	}
+	else if (this->currMapNum == 1)
+	{
+		this->hole.setPosition(sf::Vector2f(490.f, 135.f));
+	}
+	else if (this->currMapNum == 2)
+	{
+		this->hole.setPosition(sf::Vector2f(485.f, 103.f));
+	}
+	else if (this->currMapNum == 3)
+	{
+		this->hole.setPosition(sf::Vector2f(455.f, 102.f));
+	}
+	else if (this->currMapNum == 4)
+	{
+		this->hole.setPosition(sf::Vector2f(485.f, 103.f));
+	}
+	else if (this->currMapNum == 5)
+	{
+		this->hole.setPosition(sf::Vector2f(485.f, 103.f));
+	}
+	else if (this->currMapNum == 6)
+	{
+		this->hole.setPosition(sf::Vector2f(490.f, 10.f));
+	}
+	else if (this->currMapNum == 7)
+	{
+		this->hole.setPosition(sf::Vector2f(490.f, 80.f));
+	}
+	else if (this->currMapNum == 8)
+	{
+		this->hole.setPosition(sf::Vector2f(490.f, 80.f));
+	}
 }
 
 
@@ -189,6 +270,8 @@ void Game::update()
 
 	this->pollEvents();
 	this->moveGolfBall();
+
+	//std::cout << currPosition.x << " " << currPosition.y << "\n";
 }
 
 void Game::render()
@@ -203,8 +286,7 @@ void Game::render()
 	}
 
 	// All Drawing
-
-	this->window->draw(*this->mapVector[currentMap]);   // Draws map
+	this->window->draw(*this->mapVector[currMapNum]);   // Draws map
 	this->window->draw(hole);				            // Draws hole
 	this->window->draw(golfBall);			            // Draws golfBall
 
