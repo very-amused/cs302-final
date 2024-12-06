@@ -23,7 +23,7 @@ private:
 	sf::VideoMode video_mode;
 	sf::Event ev;
 
-	int currentMap;
+	int currMapNum;
 	int totalMaps;
 
 	sf::Texture ballTexture;
@@ -36,9 +36,11 @@ private:
 
 	sf::CircleShape hole;
 
-	
+	sf::Vector2f currPosition;
 	const int *mapArrays[9];
 	std::vector<TileMap*> mapVector;
+
+
 	// ******************************* Private Functions *******************************
 
 	void initVariables();
@@ -60,10 +62,11 @@ public:
 	// ******************************* Functions *******************************
 
 	void pollEvents();
-	void updateMap();
 	void moveGolfBall();
+	void updateMap();
 	
 	void resetBallPosition();
+	void resetHolePosition();
 
 	void update();
 	void render();
