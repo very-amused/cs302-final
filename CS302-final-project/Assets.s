@@ -5,7 +5,7 @@
 .global GolfBallTexture
 .type GolfBallTexture, @object
 GolfBallTexture:
-	.incbin "assets/golf-ball.png"
+	.incbin "Assets/golf-ball.png"
 GolfBallTextureEnd:
 	.byte 0 # Null terminate (just in case)
 
