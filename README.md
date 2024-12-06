@@ -1,6 +1,8 @@
 # cs302-final
 CS302 final project.
 
+Updated Demo Video- https://youtu.be/eL2aYGT3Fvs
+
 # Time Log
 |Name|date|time|
 |----|----|----|
