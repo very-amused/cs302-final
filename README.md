@@ -18,16 +18,17 @@ Updated Demo Video- https://youtu.be/eL2aYGT3Fvs
 |Keith | 12-5 | 10:30AM-3PM |
 |Larry| 12-05 | 10:30AM - 4PM|
 |Larry| 12-03 | 7PM - 10PM|
-|Keith| 12-5 | 6:30PM-11PM|
+|Keith| 12-5 | 6:30PM-11:30PM|
+|Charles| 12-5| 10:00PM - 11:30PM|
 
 
 Totals-
 1. Owen: 12.5hrs
-2. Charles: 11 hrs
+2. Charles: 12.5 hrs
 3. Larry: 14.5hrs
-4. Keith: 9 hrs
+4. Keith: 9.5 hrs
 
-Total: 47 hrs
+Total: 49 hrs
 
 These hours do not include work on the alpha revision in unity. Those hours are reflected in the Challenge 5 reports for this groupthis group
 
