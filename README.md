@@ -17,10 +17,10 @@ CS302 final project.
 
 
 Totals-
-Owen: 12.5hrs
-Charles: 10.5hrs
-Larry:
-Keith:
+1. Owen: 12.5hrs
+2. Charles: 10.5hrs
+3. Larry:
+4. Keith:
 
 Total: 22.5 hrs
 
@@ -37,7 +37,7 @@ Charlie would start on the collision detection while Larry works on moving the s
 
 
 # How to run/compile
-1. clone repo into VS
+1. clone repo into Visual Studio
 2. SFML Must be downloaded and linked to the project
   Properties->C/C++->General-> add sfml include to additional include directories
   Properties->Linker->Generl-> add sfml lib to additional library directories
