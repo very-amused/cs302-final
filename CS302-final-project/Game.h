@@ -33,6 +33,8 @@ private:
 
 	sf::CircleShape hole;
 
+	
+	const int *mapArrays[9];
 	std::vector<TileMap*> mapVector;
 	// ******************************* Private Functions *******************************
 
