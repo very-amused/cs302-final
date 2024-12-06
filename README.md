@@ -37,8 +37,8 @@ Charlie would start on the collision detection while Larry works on moving the s
 
 
 # How to run/compile
-clone repo into VS
-SFML Must be downloaded and linked to the project
+1. clone repo into VS
+2. SFML Must be downloaded and linked to the project
   Properties->C/C++->General-> add sfml include to additional include directories
   Properties->Linker->Generl-> add sfml lib to additional library directories
-run the program
+3. run the program
