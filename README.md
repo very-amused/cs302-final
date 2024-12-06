@@ -13,6 +13,7 @@ CS302 final project.
 |Larry| December 2-3 | 10:40PM - 2:10AM|
 |Larry| 12-03 | 9:20AM - 10:45AM|
 |Charles| 12-5 | 2:00PM-6:00PM |
+|Keith | 12-5 | 10:30AM-3PM |
 
 
 Totals-
