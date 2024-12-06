@@ -30,8 +30,8 @@ private:
 	sf::Sprite golfBall;
 	bool ballMovementTrue;
 	sf::Vector2f ballMovementDir;
-	int ballVelocity = 0;
-	int ballAccel = 0;
+	float ballVelocity = 0;
+	int ballDecel = 2;
 	sf::Vector2f mousePosition;			// of mouse click
 
 	sf::CircleShape hole;

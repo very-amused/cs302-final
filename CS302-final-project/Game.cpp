@@ -136,10 +136,12 @@ void Game::pollEvents()
 			if (this->ballMovementTrue) {
 				// Get vector from ball pos to mouse pos
 				sf::Vector2f ballPosition = golfBall.getPosition();
-				ballMovementDir.x = mousePosition.x - ballPosition.x;
-				ballMovementDir.y = mousePosition.y - ballPosition.y;
-				// Scale dir to a unit vector
+				ballMovementDir.x = (mousePosition.x - ballPosition.x);
+				ballMovementDir.y = (mousePosition.y - ballPosition.y);
+				// Set initial velocity as norm * 50
 				float ballMovementNorm = sqrtf(powf(ballMovementDir.x, 2) + powf(ballMovementDir.y, 2));
+				ballVelocity = 1;
+				// Scale dir to a unit vector
 				ballMovementDir.x /= ballMovementNorm;
 				ballMovementDir.y /= ballMovementNorm;
 				shotCounter++;
@@ -165,12 +167,15 @@ void Game::moveGolfBall()
 {
 	// Calculates velocity x and y based on difference in position
 	sf::Vector2f ballPosition = golfBall.getPosition();
-	float x_velocity = (mousePosition.x - ballPosition.x) / 50;
-	float y_velocity = (mousePosition.y - ballPosition.y) / 50;
 
-	// Stupid movement
+	// Ball movement
 	if (ballMovementTrue)
 	{
+		float x_velocity = std::max(ballMovementDir.x * ballVelocity, video_mode.width - ballPosition.x);
+		float y_velocity = std::max(ballMovementDir.y * ballVelocity, video_mode.height - ballPosition.y);
+
+		// Apply decel
+		ballVelocity -= ballDecel;
 
 		golfBall.move(x_velocity, y_velocity);
 
