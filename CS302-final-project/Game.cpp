@@ -134,8 +134,6 @@ void Game::pollEvents()
 			mousePosition.x = this->ev.mouseButton.x;
 			mousePosition.y = this->ev.mouseButton.y;
 		}
-		
-
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8)
 		{
 			this->window->close();
@@ -147,6 +145,7 @@ void Game::updateMap()
 {
 	// Updates things on map and prints map number 
 	std::cout << "Map #" << this->currentMap + 2 << "\n";
+
 	this->currentMap++;
 	this->resetBallPosition();
 }
@@ -161,12 +160,15 @@ void Game::moveGolfBall()
 	// Stupid movement
 	if (ballMovementTrue)
 	{
+
 		golfBall.move(x_velocity, y_velocity);
 
+		// Finds tile position according to map and resets position if touching water/tree
 		sf::Vector2f position = golfBall.getPosition();
 		int xCoord = position.x / 32;
 		int yCoord = position.y / 32;
 
+		
 		if (mapArrays[currentMap][yCoord * 16 + xCoord] == 2 || mapArrays[currentMap][yCoord * 16 + xCoord] == 1) {
 			this->resetBallPosition();
 		}
