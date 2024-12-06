@@ -29,6 +29,9 @@ private:
 	sf::Texture ballTexture;
 	sf::Sprite golfBall;
 	bool ballMovementTrue;
+	sf::Vector2f ballMovementDir;
+	int ballVelocity = 0;
+	int ballAccel = 0;
 	sf::Vector2f mousePosition;			// of mouse click
 
 	sf::CircleShape hole;

@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "mapArrays.h"
+#include <SFML/System/Vector2.hpp>
+#include <cmath>
 #include <iostream>
 // ******************************* Private Functions *******************************
 
@@ -127,12 +129,21 @@ void Game::pollEvents()
 		}
 		else if (this->ev.type == sf::Event::MouseButtonPressed)
 		{
+			// Initiate ball movement
 			this->ballMovementTrue = !ballMovementTrue;
-			if (this->ballMovementTrue) {
-				shotCounter++;
-			}
 			mousePosition.x = this->ev.mouseButton.x;
 			mousePosition.y = this->ev.mouseButton.y;
+			if (this->ballMovementTrue) {
+				// Get vector from ball pos to mouse pos
+				sf::Vector2f ballPosition = golfBall.getPosition();
+				ballMovementDir.x = mousePosition.x - ballPosition.x;
+				ballMovementDir.y = mousePosition.y - ballPosition.y;
+				// Scale dir to a unit vector
+				float ballMovementNorm = sqrtf(powf(ballMovementDir.x, 2) + powf(ballMovementDir.y, 2));
+				ballMovementDir.x /= ballMovementNorm;
+				ballMovementDir.y /= ballMovementNorm;
+				shotCounter++;
+			}
 		}
 		if (this->ev.type == sf::Event::Closed || this->currentMap == 8)
 		{
@@ -169,6 +180,7 @@ void Game::moveGolfBall()
 		int yCoord = position.y / 32;
 
 		
+		// Detect ball collision
 		if (mapArrays[currentMap][yCoord * 16 + xCoord] == 2 || mapArrays[currentMap][yCoord * 16 + xCoord] == 1) {
 			this->resetBallPosition();
 		}
