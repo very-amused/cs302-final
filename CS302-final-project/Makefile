@@ -3,9 +3,10 @@ sfml-flags=-lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio -lsfml-netwo
 LDFLAGS=$(sfml-flags)
 
 src-files=$(shell find -name '*.cpp')
+src-asm=$(shell find -name '*.s')
 obj-files=$(src-files:.cpp=.cpp.o)
 
-main: $(obj-files)
+main: $(obj-files) $(src-asm)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o$@ $^
 
 release: CXXFLAGS+=-O3

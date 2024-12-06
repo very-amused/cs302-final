@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Assets.h"
 #include <iostream>
 // ******************************* Private Functions *******************************
 
@@ -17,7 +18,8 @@ void Game::initVariables()
 
 	// Loading golf ball and texture
 	// TODO: embed assets at build time
-	this->ballTexture.loadFromFile("golf-ball.png");
+	//this->ballTexture.loadFromFile("golf-ball.png");
+	this->ballTexture.loadFromMemory(GolfBallTexture, GolfBallTextureLen);
 	this->golfBall.setTexture(ballTexture);
 
 	// Sets ball up at origin
