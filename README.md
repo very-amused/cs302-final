@@ -25,7 +25,9 @@ Totals-
 3. Larry: 14.5hrs
 4. Keith: 9 hrs
 
-Total: 38 hrs
+Total: 47 hrs
+
+These hours do not include work on the alpha revision in unity. Those hours are reflected in the Challenge 5 reports for this groupthis group
 
 # Team Meetings
 November 11th from 11PM to 12AM
