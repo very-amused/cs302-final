@@ -31,7 +31,7 @@ private:
 	bool ballMovementTrue;
 	sf::Vector2f ballMovementDir;
 	float ballVelocity = 0;
-	int ballDecel = 2;
+	float ballDecel = 6;
 	sf::Vector2f mousePosition;			// of mouse click
 
 	sf::CircleShape hole;

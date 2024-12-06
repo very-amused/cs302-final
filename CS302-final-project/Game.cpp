@@ -138,9 +138,9 @@ void Game::pollEvents()
 				sf::Vector2f ballPosition = golfBall.getPosition();
 				ballMovementDir.x = (mousePosition.x - ballPosition.x);
 				ballMovementDir.y = (mousePosition.y - ballPosition.y);
-				// Set initial velocity as norm * 50
-				float ballMovementNorm = sqrtf(powf(ballMovementDir.x, 2) + powf(ballMovementDir.y, 2));
-				ballVelocity = 1;
+				// Set initial velocity as norm
+				const float ballMovementNorm = sqrtf(powf(ballMovementDir.x, 2) + powf(ballMovementDir.y, 2));
+				ballVelocity = ballMovementNorm / 3.5;
 				// Scale dir to a unit vector
 				ballMovementDir.x /= ballMovementNorm;
 				ballMovementDir.y /= ballMovementNorm;
@@ -171,13 +171,18 @@ void Game::moveGolfBall()
 	// Ball movement
 	if (ballMovementTrue)
 	{
-		float x_velocity = std::max(ballMovementDir.x * ballVelocity, video_mode.width - ballPosition.x);
-		float y_velocity = std::max(ballMovementDir.y * ballVelocity, video_mode.height - ballPosition.y);
+		float x_velocity = std::min(ballMovementDir.x * ballVelocity, video_mode.width - ballPosition.x);
+		float y_velocity = std::min(ballMovementDir.y * ballVelocity, video_mode.height - ballPosition.y);
 
 		// Apply decel
 		ballVelocity -= ballDecel;
+		if (ballVelocity < 0) {
+			ballVelocity = 0;
+			ballMovementTrue = false;
+		} else {
+			golfBall.move(x_velocity, y_velocity);
+		}
 
-		golfBall.move(x_velocity, y_velocity);
 
 		// Finds tile position according to map and resets position if touching water/tree
 		sf::Vector2f position = golfBall.getPosition();
